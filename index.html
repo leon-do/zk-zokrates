@@ -1,3 +1,9 @@
+<div id="artifacts" style="margin: 20px"></div>
+<div id="witness" style="margin: 20px"></div>
+<div id="output" style="margin: 20px"></div>
+<div id="proof" style="margin: 20px"></div>
+<div id="verified" style="margin: 20px"></div>
+
 <script src="https://unpkg.com/zokrates-js@latest/umd.min.js"></script>
 <script src="./keypair.js"></script>
 <script type="module">
@@ -9,6 +15,7 @@
 
     // compilation
     const artifacts = zokratesProvider.compile(source);
+    document.getElementById("artifacts").innerHTML = JSON.stringify(artifacts);
 
     // generate keypair
     // const keypair = zokratesProvider.setup(artifacts.program);
@@ -18,6 +25,8 @@
       "2",
       "3",
     ]);
+    document.getElementById("witness").innerHTML = JSON.stringify({ witness });
+    document.getElementById("output").innerHTML = JSON.stringify({ output });
 
     // generate proof
     const proof = zokratesProvider.generateProof(
@@ -25,6 +34,7 @@
       witness,
       keypair.pk
     );
+    document.getElementById("proof").innerHTML = JSON.stringify({ proof });
 
     // verify off chain
     const isVerified = zokratesProvider.verify(keypair.vk, proof);
@@ -46,6 +56,8 @@
 
     // https://zokrates.github.io/toolbox/verification.html
     const verified = await contract.verifyTx(proof.proof, proof.inputs);
-    console.log(verified);
+    document.getElementById("verified").innerHTML = JSON.stringify({
+      verified,
+    });
   }
 </script>
