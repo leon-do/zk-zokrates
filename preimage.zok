@@ -1,4 +1,0 @@
-import "hashes/sha256/512bitPacked" as sha256
-
-def main(field[2] value, private field[4] preimage) -> (bool):
-    return sha256(preimage) == value
