@@ -18,6 +18,9 @@
     // run setup
     const keypair = zokratesProvider.setup(artifacts.program);
 
+    const verifier = zokratesProvider.exportSolidityVerifier(keypair.vk);
+    console.log(verifier);
+
     // generate proof
     const proof = zokratesProvider.generateProof(
       artifacts.program,
@@ -43,6 +46,7 @@
     // prettier-ignore
     // const verified = await contract.verifyTx([["0x0937c1a5eb1db35b26d0c0c1603d4c6b8c28affc14ca4abfa7a678a6a04a38f4","0x12db51bcbb13560932b9689c6fca5ee850cceee97ad5f41f2cf984710aa75a96",],[["0x1eb2b2c9c4ea68ce97cb3f5c477e2c121f1b7bcb88516f2489f3cbe6983fa5aa","0x14b080cd0c6f69dc8a5271e5b2adb31608b0fbe2828902c440294df717535e16",],["0x07ee1018974786125cea564bcb24b7c1e8f17c6cff3180f357fce7e70b156535","0x14bdcfbbd1efbadf0a5dc7a9ebfa7d3189b1c082f263a0587d65dd8d088caf3a",],],["0x278208223cc94e71bbaf7baa17f517aec2f6a7424b937cb5781af76ea051b21d","0x05cebdc2cbdf8e9e7269e40abb500e3e44754c56b78919812d0b7e076b30171f",],],["0x0000000000000000000000000000000000000000000000000000000000000004","0x0000000000000000000000000000000000000000000000000000000000000001",]);
 
+    // https://zokrates.github.io/toolbox/verification.html
     const verified = await contract.verifyTx(proof.proof, proof.inputs)
     console.log(verified);
   }
